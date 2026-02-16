@@ -65,7 +65,7 @@ function startGame() {
 
         // Texte d'attente
         const stats = document.getElementById('hero-stats-content');
-        if(stats) stats.innerHTML = `<div class="hero-summary-box"><h4>Profil Astral</h4><p class="hero-summary-text"><strong>Essence :</strong> Arcane ${userMandala.axes.QUINT.v}<br><em>En attente du destin...</em></p></div>`;
+        if(stats) stats.innerHTML = `<div class="hero-summary-box"><h4>Profil Transrationnel</h4><p class="hero-summary-text"><strong>Essence :</strong> Arcane ${userMandala.axes.QUINT.v}<br><em>En attente du destin...</em></p></div>`;
         
         showScenarioMenu();
     }, 1000);
