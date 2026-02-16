@@ -429,14 +429,27 @@ function safeJSONParse(str) {
     } catch(e) { return null; }
 }
 
+// DANS app.js
+
 async function callAI(action, card=null, extraContext="") {
     const loader = document.getElementById('oracle-loader');
     if(loader) loader.classList.remove('hidden');
-
+    
+    // 1. RÉCUPÉRATION DE L'INSTRUCTION DE L'ÉTAPE EN COURS
+    let currentStepInstruction = "";
+    if (currentScenario && currentScenario.steps && currentScenario.steps[currentStepIndex]) {
+        // On prend l'instruction précise du tableau steps (ex: "Rencontre avec une créature...")
+        currentStepInstruction = currentScenario.steps[currentStepIndex].instruction;
+    }
+    
     const payload = {
         action: action,
         scenarioTitle: currentScenario ? currentScenario.title : "",
         styleInstruction: currentScenario ? currentScenario.prompt_style : "",
+        
+        // ICI : ON ENVOIE L'INSTRUCTION DU CHAPITRE À L'IA
+        stepInstruction: currentStepInstruction, 
+        
         heroStage: userMandala.lifeStage,
         heroGender: userMandala.gender,
         userSituation: userRealSituation,
@@ -456,7 +469,6 @@ async function callAI(action, card=null, extraContext="") {
         return "L'Oracle est muet.";
     }
 }
-
 /* --- MATHS MANDALA --- */
 function reduce(n) { if (n <= 22 && n > 0) return n; let s = 0; n.toString().split('').forEach(d => s += parseInt(d)); return s > 22 ? reduce(s) : s; }
 function sumDigits(n) { let s = 0; n.toString().split('').forEach(d => s += parseInt(d)); return s; }
