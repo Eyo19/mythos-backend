@@ -702,12 +702,13 @@ function deleteSave(saveId) {
     // 5. Imprimer / PDF (VERSION FINALISÉE : HÉROS + RÉACTIONS + NETTOYAGE)
     // DANS app.js - Remplace la fonction printBook() par celle-ci :
     
+    // DANS app.js - Remplace la fonction printBook() par celle-ci :
+    
     function printBook() {
         if (!currentScenario) { alert("Aucune histoire à imprimer."); return; }
         
         const heroName = userMandala.user || "Le Héros";
         const title = currentScenario.title;
-        // On récupère l'image du scénario pour l'en-tête PDF
         const headerImgSrc = `images/${getScenarioImgIndex(currentScenario.id)}.png`;
         
         // --- 1. RÉCUPÉRATION DES DONNÉES ---
@@ -719,7 +720,7 @@ function deleteSave(saveId) {
         // --- 2. CONSTRUCTION DU CONTENU PDF ---
         const tempContainer = document.createElement('div');
         
-        // A. SECTION HÉROS (Portrait + Profil au début)
+        // A. SECTION HÉROS
         const heroSection = document.createElement('div');
         heroSection.className = 'print-hero-section';
         heroSection.innerHTML = `
@@ -734,26 +735,22 @@ function deleteSave(saveId) {
     `;
         tempContainer.appendChild(heroSection);
         
-        // B. LES CHAPITRES ET RÉACTIONS
+        // B. CHAPITRES
         const chapters = Array.from(bookSource.querySelectorAll('.book-chapter-row'));
         const thoughts = Array.from(thoughtsSource.querySelectorAll('.hero-thought-bubble')); 
         
         chapters.forEach(chapter => {
-            // 1. On clone le chapitre
             const chapterClone = chapter.cloneNode(true);
             const chapterTitle = chapterClone.querySelector('h3').innerText.trim();
             
             tempContainer.appendChild(chapterClone);
             
-            // 2. On cherche la réaction correspondante
             const matchKey = chapterTitle.split(':')[0].trim().toLowerCase(); 
-            
             const matchedThought = thoughts.find(t => {
                 const label = t.querySelector('.thought-label').innerText.toLowerCase();
                 return label.includes(matchKey);
             });
             
-            // 3. Si on trouve, on l'insère
             if (matchedThought) {
                 const reactionDiv = document.createElement('div');
                 reactionDiv.className = 'print-reaction';
@@ -764,7 +761,7 @@ function deleteSave(saveId) {
             }
         });
         
-        // --- 3. GÉNÉRATION DE LA FENÊTRE ---
+        // --- 3. GÉNÉRATION ---
         const printWindow = window.open('', '_blank', 'width=900,height=900');
         
         printWindow.document.write(`
@@ -784,19 +781,18 @@ function deleteSave(saveId) {
                 margin: 0 auto; 
             }
             
-            /* HEADER DU PDF - CORRECTION PROPORTIONS */
+            /* HEADER ÉPURÉ (SANS BORDURE) */
             .print-header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px double #8b0000; }
             h1 { font-family: 'Cinzel', serif; color: #8b0000; margin: 10px 0; font-size: 2.5em; }
             h2 { font-family: 'Cinzel', serif; color: #555; font-size: 1.1em; letter-spacing: 2px; text-transform: uppercase; }
             
-            /* ICI : height auto pour respecter le ratio, max-height pour ne pas envahir la page */
             .book-header-img-top { 
                 width: 100%; 
                 height: auto; 
                 max-height: 300px; 
                 object-fit: contain; 
                 border-radius: 4px; 
-                border: 1px solid #333; 
+                /* PLUS DE BORDURE ICI */
             }
 
             /* SECTION HÉROS */
@@ -818,7 +814,7 @@ function deleteSave(saveId) {
             }
             .hero-separator { border: 0; border-top: 1px dashed #ccc; margin: 30px 0; }
 
-            /* CHAPITRES */
+            /* TEXTE */
             .book-chapter-row { margin-bottom: 15px; padding-top: 10px; break-inside: avoid; }
             h3 { font-family: 'Cinzel', serif; color: #000; margin-top: 0; font-size: 1.4em; text-transform: uppercase; border-left: 4px solid #8b0000; padding-left: 10px; }
             .book-img-right { 
