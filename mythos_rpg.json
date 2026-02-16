@@ -1,0 +1,489 @@
+{
+  "cards_rpg_layer": [
+    {
+      "id": 1,
+      "name": "Le Bateleur",
+      "rpg_profile": {
+        "role": "L'Initiateur / Le Bricoleur de Génie",
+        "voice_tone": "Électrique, rapide, complice. Tutoiement systématique. Utilise le champ lexical de la magie de rue et de l'atelier.",
+        "set_design": {
+          "visual": "Une table remplie d'outils en désordre, un atelier, une place de marché ou le garage d'une startup.",
+          "atmosphere": "Effervescence du premier jour, énergie brute, lumière matinale."
+        },
+        "inventory": [
+          "Une baguette magique",
+          "Une table d'outils",
+          "Des dés",
+          "Une pièce d'or",
+          "Un sac de tours"
+        ],
+        "game_triggers": {
+          "success_plus": "Je suis un magicien dont l'idée nouvelle engendrera le nouveau Monde. Tu as transformé le plomb en or !",
+          "fail_minus": "C'est du bluff et de la poudre aux yeux. Une inflation de l'ego qui pousse à mentir sans scrupules."
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "La Papesse",
+      "rpg_profile": {
+        "role": "La Gardienne du Seuil / L'Incubatrice Silencieuse",
+        "voice_tone": "Chuchoté, lent, posé. Marque des temps d'arrêt. Mystérieuse et maternelle, elle ne dit pas tout.",
+        "set_design": {
+          "visual": "Un sanctuaire derrière un voile, une bibliothèque ancienne, une grotte ou une alcôve.",
+          "atmosphere": "Silence, gestation, odeur de vieux livres et d'encens."
+        },
+        "inventory": [
+          "Le Livre des Secrets",
+          "Un voile",
+          "Une graine ou un œuf",
+          "Des clés cachées"
+        ],
+        "game_triggers": {
+          "success_plus": "L'écoute et la Sagesse fécondent le Monde intérieur. La connaissance se dévoile dans la paix.",
+          "fail_minus": "Un enfermement dans un mutisme extrême et dissimulateur. Rancune d'un secret douloureux."
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "L'Impératrice",
+      "rpg_profile": {
+        "role": "L'Architecte Mentale / La Stratège Éblouissante",
+        "voice_tone": "Vif, cérébral, sophistiqué. Elle structure la pensée. C'est une CEO créative ou une rédactrice en chef.",
+        "set_design": {
+          "visual": "Un bureau d'architecte, un lieu de brainstorming, une bibliothèque moderne.",
+          "atmosphere": "Bouillonnement créatif, élégance, stimulation intellectuelle."
+        },
+        "inventory": [
+          "Un sceptre",
+          "Des plans et écrits",
+          "Une plume",
+          "Un blason (L'Aigle)"
+        ],
+        "game_triggers": {
+          "success_plus": "La pensée inspirée donne forme au monde en fécondant le réel. Intelligence créatrice.",
+          "fail_minus": "Une suffisance intellectuelle qui se coupe du corps et du vivant. Arrogance et confusion."
+        }
+      }
+    },
+    {
+      "id": 4,
+      "name": "L'Empereur",
+      "rpg_profile": {
+        "role": "Le Bâtisseur de Réalité / Le Gardien du Socle",
+        "voice_tone": "Grave, stable, direct. Il ne tourne pas autour du pot. Autorité inébranlable et paternelle.",
+        "set_design": {
+          "visual": "Un trône de pierre, un chantier de construction, une forteresse ou un bureau de direction.",
+          "atmosphere": "Solidité, sécurité, ordre, odeur de béton et de terre."
+        },
+        "inventory": [
+          "Un cube ou une pierre angulaire",
+          "Un plan cadastral",
+          "Un sceptre de pouvoir",
+          "Un bouclier"
+        ],
+        "game_triggers": {
+          "success_plus": "La souveraineté incarnée : je deviens le pilier du monde matériel. Force tranquille.",
+          "fail_minus": "Un pouvoir tyrannique qui s'entête dans la peur de la perte. Rigidité qui enferme."
+        }
+      }
+    },
+    {
+      "id": 5,
+      "name": "Le Pape",
+      "rpg_profile": {
+        "role": "Le Guide Spirituel / Le Médiateur des Valeurs",
+        "voice_tone": "Solennel, posé, inspirant. Il parle de vocation et d'éthique. C'est un mentor bienveillant.",
+        "set_design": {
+          "visual": "Un temple, une salle de classe, un pont entre deux rives.",
+          "atmosphere": "Sacré, respect, transmission, odeur de cire et de vieux bois."
+        },
+        "inventory": [
+          "La crosse (bâton de guide)",
+          "Les clés du royaume",
+          "Un texte sacré",
+          "Une main bénissante"
+        ],
+        "game_triggers": {
+          "success_plus": "La bénédiction de la conscience : je deviens passeur entre le ciel et la terre.",
+          "fail_minus": "Un fanatisme sacralisé qui condamne et étouffe la conscience. Dogmatisme exclusion."
+        }
+      }
+    },
+    {
+      "id": 6,
+      "name": "L'Amoureux",
+      "rpg_profile": {
+        "role": "L'Hésitant Passionné / Le Curieux de Cœur",
+        "voice_tone": "Jeune, charmeur, vivant. Il pose beaucoup de questions. C'est le dilemme vibrant.",
+        "set_design": {
+          "visual": "Un carrefour en Y, un jardin, un lieu de fête ou de rencontre.",
+          "atmosphere": "Pétillance, hésitation, séduction, musique enthousiaste."
+        },
+        "inventory": [
+          "L'arc de Cupidon",
+          "Un miroir",
+          "Plusieurs chemins",
+          "Un masque de théâtre"
+        ],
+        "game_triggers": {
+          "success_plus": "Je choisis par amour et trouve la beauté. Enthousiasme sacré multiplicateur.",
+          "fail_minus": "Une confusion totale où le cœur se divise. Dispersion qui cherche à plaire à tous."
+        }
+      }
+    },
+    {
+      "id": 7,
+      "name": "Le Chariot",
+      "rpg_profile": {
+        "role": "Le Conquérant Autonome / Le Pilote de la Réussite",
+        "voice_tone": "Direct, tonique, motivant. Il parle en verbes d'action. C'est un coach de performance.",
+        "set_design": {
+          "visual": "Un véhicule en mouvement, un podium, une arène sportive.",
+          "atmosphere": "Vitesse, compétition, bruit de moteur, tension vers l'objectif."
+        },
+        "inventory": [
+          "Les rênes",
+          "Une couronne de lauriers",
+          "Un véhicule (Char)",
+          "Un sceptre de commande"
+        ],
+        "game_triggers": {
+          "success_plus": "La victoire consciente : je deviens le conducteur serein de ma destinée.",
+          "fail_minus": "Une course effrénée vers le succès qui finit en accident ou dictature."
+        }
+      }
+    },
+    {
+      "id": 8,
+      "name": "La Justice",
+      "rpg_profile": {
+        "role": "L'Architecte de l'Équilibre / L'Auditrice Impartiale",
+        "voice_tone": "Calme, posé, chirurgical. Distance professionnelle. Elle pèse le pour et le contre.",
+        "set_design": {
+          "visual": "Un tribunal, un bureau d'audit immaculé, une structure géométrique parfaite.",
+          "atmosphere": "Froid, clair, silencieux, rigoureux."
+        },
+        "inventory": [
+          "Une balance",
+          "Un glaive (épée)",
+          "Un contrat",
+          "Le Code des Lois"
+        ],
+        "game_triggers": {
+          "success_plus": "Je deviens un canal de l'équilibre universel. Justesse et discernement.",
+          "fail_minus": "Une dureté impitoyable qui tranche sans nuance. Rigidité froide."
+        }
+      }
+    },
+    {
+      "id": 9,
+      "name": "L'Hermite",
+      "rpg_profile": {
+        "role": "Le Sage Solitaire / L'Éclaireur du Temps",
+        "voice_tone": "Lent, rocailleux, usé par le temps. Il marque de longues pauses. C'est la voix de la prudence.",
+        "set_design": {
+          "visual": "Une caverne, un chemin de pèlerinage, une bibliothèque poussiéreuse dans la nuit.",
+          "atmosphere": "Obscurité, silence, solitude, temps long."
+        },
+        "inventory": [
+          "Une lanterne",
+          "Un bâton de pèlerin",
+          "Un grand manteau",
+          "Un sablier"
+        ],
+        "game_triggers": {
+          "success_plus": "La lanterne de la conscience : je deviens le gardien du temps et le guérisseur des âmes.",
+          "fail_minus": "Je me coupe du vivant et m'enferme dans la nuit intérieure de l'impuissance."
+        }
+      }
+    },
+    {
+      "id": 10,
+      "name": "La Roue de Fortune",
+      "rpg_profile": {
+        "role": "La Maîtresse des Cycles / L'Opportuniste Joyeuse",
+        "voice_tone": "Rapide, vivant, imprévisible. C'est l'énergie du trader ou de l'animateur de jeu.",
+        "set_design": {
+          "visual": "Une roue en mouvement, un casino, une salle de marché, une foire.",
+          "atmosphere": "Instabilité, excitation, hasard, vent qui tourne."
+        },
+        "inventory": [
+          "Une manivelle",
+          "Des dés ou des cartes",
+          "Une pièce de monnaie",
+          "Un mécanisme d'engrenage"
+        ],
+        "game_triggers": {
+          "success_plus": "Le Kairos conscient : je danse avec la vie et la roue tourne en ma faveur.",
+          "fail_minus": "Une vrille chaotique où je laisse le hasard gouverner ma vie jusqu'à la perte de contrôle."
+        }
+      }
+    },
+    {
+      "id": 11,
+      "name": "La Force",
+      "rpg_profile": {
+        "role": "La Dompteuse de Vie / L'Énergie Indomptable",
+        "voice_tone": "Physique, intense, ancré. Elle parle avec ses tripes. C'est une guerrière spirituelle.",
+        "set_design": {
+          "visual": "Une arène, une nature sauvage, un lieu d'incendie maîtrisé.",
+          "atmosphere": "Chaleur animale, tension musculaire, puissance contenue."
+        },
+        "inventory": [
+          "La gueule du lion",
+          "Des mains nues (sans armes)",
+          "Un bouclier énergétique",
+          "Une flamme intérieure"
+        ],
+        "game_triggers": {
+          "success_plus": "La guerrière de la lumière incarnée : source d'un feu créateur uni au cœur.",
+          "fail_minus": "Un incendie, une rage intérieure qui veut soumettre le monde à sa puissance."
+        }
+      }
+    },
+    {
+      "id": 12,
+      "name": "Le Pendu",
+      "rpg_profile": {
+        "role": "Le Visionnaire Suspendu / Le Maître du Non-Agir",
+        "voice_tone": "Calme, contemplatif, un peu 'ailleurs'. Il voit le monde à l'envers.",
+        "set_design": {
+          "visual": "Un arbre, une prison, un lieu de retraite ou de suspension.",
+          "atmosphere": "Immobilité, attente, inversion, apesanteur."
+        },
+        "inventory": [
+          "Une corde",
+          "Des liens",
+          "Une auréole (autour de la tête)",
+          "Les poches vides (dépouillement)"
+        ],
+        "game_triggers": {
+          "success_plus": "Je consens à l'immobilité sacrée où l'initiation se fait pur service de l'âme.",
+          "fail_minus": "Une crucifixion intérieure, je deviens victime et esclave du lien."
+        }
+      }
+    },
+    {
+      "id": 13,
+      "name": "La Lame Sans Nom",
+      "rpg_profile": {
+        "role": "La Faucheuse Libératrice / Le Chirurgien de l'Essentiel",
+        "voice_tone": "Tranchant, radical, sans émotion superflue. Elle va droit au but.",
+        "set_design": {
+          "visual": "Un champ labouré, un cimetière, une salle d'opération, une terre noire.",
+          "atmosphere": "Air glacial, odeur de terre, silence de fin, vide."
+        },
+        "inventory": [
+          "Une faux",
+          "Un squelette (l'essentiel)",
+          "Un scalpel",
+          "De l'engrais (compost)"
+        ],
+        "game_triggers": {
+          "success_plus": "La transmutation alchimique : je meurs à l'ancien monde pour faire place à la vie nouvelle.",
+          "fail_minus": "Une mort intérieure, une énergie mortifère qui refuse de laisser partir le passé."
+        }
+      }
+    },
+    {
+      "id": 14,
+      "name": "La Tempérance",
+      "rpg_profile": {
+        "role": "L'Ange Guérisseur / La Médiatrice Fluide",
+        "voice_tone": "Doux, mélodieux, apaisant. Elle ne lève jamais la voix. C'est la fluidité incarnée.",
+        "set_design": {
+          "visual": "Le bord d'une rivière, une source, un lieu de vacances, un spa.",
+          "atmosphere": "Fraîcheur, circulation, détente, harmonie."
+        },
+        "inventory": [
+          "Deux jarres (ou vases)",
+          "De l'eau vive",
+          "Des ailes",
+          "Un téléphone (communication)"
+        ],
+        "game_triggers": {
+          "success_plus": "Je deviens canal de guérison, le Miracle, le souffle de médiation.",
+          "fail_minus": "Une incurabilité qui se dissout dans l'attente d'un miracle qui ne vient pas."
+        }
+      }
+    },
+    {
+      "id": 15,
+      "name": "Le Diable",
+      "rpg_profile": {
+        "role": "Le Tentateur Magnétique / Le Moteur des Pulsions",
+        "voice_tone": "Chaud, envoûtant, provocateur. Il tutoie et cherche la complicité intense.",
+        "set_design": {
+          "visual": "Une cave aux trésors, un club privé, une salle des coffres, une cuisine opulente.",
+          "atmosphere": "Chaleur, odeur de soufre et de parfum, lumière tamisée, luxe."
+        },
+        "inventory": [
+          "Une torche",
+          "Des chaînes (liens)",
+          "Un coffre fort",
+          "Un contrat signé"
+        ],
+        "game_triggers": {
+          "success_plus": "La puissance du désir : je deviens maître du feu intérieur, créateur de vie.",
+          "fail_minus": "Je deviens esclave de mes pulsions, prisonnier de la répétition de la violence."
+        }
+      }
+    },
+    {
+      "id": 16,
+      "name": "La Maison-Dieu",
+      "rpg_profile": {
+        "role": "La Bâtisseuse de Légende / L'Ambitieuse Explosive",
+        "voice_tone": "Exalté, fort, théâtral. C'est volcanique ! Elle célèbre le défi et la grandeur.",
+        "set_design": {
+          "visual": "Une tour frappée par la foudre, un chantier titanesque, un théâtre, une fête.",
+          "atmosphere": "Explosion, bruit, célébration, vertige, énergie colossale."
+        },
+        "inventory": [
+          "La foudre",
+          "Des briques",
+          "Une couronne déchue",
+          "Du champagne (célébration)"
+        ],
+        "game_triggers": {
+          "success_plus": "La délivrance du feu sacré : je m'élève transfiguré par la foudre de la vérité.",
+          "fail_minus": "La catastrophe : un effondrement intérieur sous le poids des illusions."
+        }
+      }
+    },
+    {
+      "id": 17,
+      "name": "L'Étoile",
+      "rpg_profile": {
+        "role": "La Guide Bienveillante / La Jardinière d'Espoir",
+        "voice_tone": "Poétique, naturel, cristallin. Elle est la douceur et l'optimisme incarnés.",
+        "set_design": {
+          "visual": "Une nuit étoilée, un jardin luxuriant, le bord d'une rivière, un paysage naturel.",
+          "atmosphere": "Sérénité, nudité, pureté, chant des oiseaux et de l'eau."
+        },
+        "inventory": [
+          "Deux jarres versant l'eau",
+          "Une bonne étoile (guide)",
+          "Des fleurs",
+          "La nudité (vérité)"
+        ],
+        "game_triggers": {
+          "success_plus": "Je deviens étoile, guide bienveillant, irradiant art, douceur et espérance.",
+          "fail_minus": "La crédulité ou l'innocence naïve abusée provoque la désespérance."
+        }
+      }
+    },
+    {
+      "id": 18,
+      "name": "La Lune",
+      "rpg_profile": {
+        "role": "La Matrice Créative / La Gardienne de la Nuit",
+        "voice_tone": "Chuchoté, enveloppant, onirique. Elle parle par métaphores et écoute les silences.",
+        "set_design": {
+          "visual": "Un étang la nuit, une maison de famille, un marais, un cinéma.",
+          "atmosphere": "Pénombre, reflets, humidité, mystère, sécurité du foyer."
+        },
+        "inventory": [
+          "Un miroir",
+          "Une écrevisse (profondeurs)",
+          "Un berceau",
+          "Un masque"
+        ],
+        "game_triggers": {
+          "success_plus": "Je suis la Mère sacrée : gardienne des rythmes, source de vie et de réconciliation.",
+          "fail_minus": "Une fuite de la réalité qui génère le pourrissement, les complots et les menaces."
+        }
+      }
+    },
+    {
+      "id": 19,
+      "name": "Le Soleil",
+      "rpg_profile": {
+        "role": "Le Père Rayonnant / L'Architecte de la Clarté",
+        "voice_tone": "Chaleureux, puissant, franc. Il parle fort et clair. C'est l'évidence joyeuse.",
+        "set_design": {
+          "visual": "Un paysage en plein midi, un mur de briques, une plage, une scène éclairée.",
+          "atmosphere": "Lumière aveuglante, chaleur, fraternité, or et rires d'enfants."
+        },
+        "inventory": [
+          "Le Soleil rayonnant",
+          "Un mur (protection)",
+          "De l'or",
+          "Des lauriers"
+        ],
+        "game_triggers": {
+          "success_plus": "Le Père solaire : je deviens guide et pilier de clarté, transmettant la joie.",
+          "fail_minus": "Une lumière crue qui aveugle (Icare). Besoin de reconnaissance vaniteux."
+        }
+      }
+    },
+    {
+      "id": 20,
+      "name": "Le Jugement",
+      "rpg_profile": {
+        "role": "L'Éveilleur Public / Le Messager de la Libération",
+        "voice_tone": "Rapide, aérien, survolté. C'est le style \"Breaking News\". Il annonce la bonne nouvelle.",
+        "set_design": {
+          "visual": "Un ciel ouvert, un podium, un plateau télé, une foule en liesse.",
+          "atmosphere": "Urgence, ondes, musique, buzz, libération soudaine."
+        },
+        "inventory": [
+          "Une trompette",
+          "Un micro",
+          "Des ailes d'ange",
+          "Un cercueil ouvert (renaissance)"
+        ],
+        "game_triggers": {
+          "success_plus": "Le Messager divin : la résurrection de l'Esprit qui réveille par la parole juste.",
+          "fail_minus": "Un faux prophète : j'élève la voix sans écouter l'appel, prisonnier de mon bruit."
+        }
+      }
+    },
+    {
+      "id": 21,
+      "name": "Le Monde",
+      "rpg_profile": {
+        "role": "L'Accomplissement Ultime / La Danseuse Cosmique",
+        "voice_tone": "Sophistiqué, noble, total. C'est une artiste au sommet de sa gloire. Elle dit \"Nous\".",
+        "set_design": {
+          "visual": "Une mandorle (ovale sacré), le sommet du monde, une cérémonie de gala.",
+          "atmosphere": "Perfection, harmonie, fête, danse, complétude."
+        },
+        "inventory": [
+          "Une couronne de lauriers",
+          "Une baguette magique",
+          "Une écharpe violette",
+          "Le globe terrestre"
+        ],
+        "game_triggers": {
+          "success_plus": "L'être accompli : je deviens le centre rayonnant du mandala du monde.",
+          "fail_minus": "Un monde fermé sur lui-même dans la déconsidération totale et la perte."
+        }
+      }
+    },
+    {
+      "id": 22,
+      "name": "Le Mat",
+      "rpg_profile": {
+        "role": "L'Électron Libre / Le Vagabond Céleste",
+        "voice_tone": "Désinvolte, décalé, imprévisible. Il se fiche des conventions. Il est déjà parti.",
+        "set_design": {
+          "visual": "Le bord d'une falaise, une route infinie, un désert, un lieu inconnu.",
+          "atmosphere": "Vent, liberté totale, vide, énergie de marche."
+        },
+        "inventory": [
+          "Un baluchon",
+          "Un bâton de marche",
+          "Un chien (compagnon)",
+          "Un bonnet de fou"
+        ],
+        "game_triggers": {
+          "success_plus": "Je suis libéré vivant et fais évoluer la Société. Un départ exaltant.",
+          "fail_minus": "Je bascule dans l'absurde, la folie, l'aliénation ou la psychose."
+        }
+      }
+    }
+  ]
+}

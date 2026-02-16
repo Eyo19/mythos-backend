@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYTHOS - Le Miroir de l'Âme</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="setup-container">
+        <div class="setup-card">
+            <div class="setup-header">
+                <img src="ImageMythos.png" alt="Mythos" class="mythos-banner" onerror="this.style.display='none'">
+            </div>
+            
+            <div class="setup-content">
+                <h1 class="setup-title">L'Oracle vous attend</h1>
+                <p class="setup-subtitle">Révélez votre identité pour ouvrir le destin.</p>
+
+                <div class="input-group-vertical">
+                    <label>Identité</label>
+                    <input type="text" id="user-name" placeholder="Votre Nom" autocomplete="off">
+                    
+                    <div class="row-inputs">
+                        <div class="half-input">
+                            <label>Naissance</label>
+                            <input type="date" id="user-dob">
+                        </div>
+                        <div class="half-input">
+                            <label>Genre</label>
+                            <select id="user-gender">
+                                <option value="Femme">Femme</option>
+                                <option value="Homme">Homme</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <label>Stade de Vie</label>
+                    <select id="user-stage">
+                        <option value="enfant">Enfant (L'Éveil & la Magie)</option>
+                        <option value="ado">Adolescent (La Révolte & l'Identité)</option>
+                        <option value="adulte" selected>Adulte (La Construction & le Pouvoir)</option>
+                        <option value="sage">Sage (La Transmission & le Bilan)</option>
+                        <option value="spirituel">Spirituel (La Transcendance)</option>
+                    </select>
+
+                    <label>Votre Quête</label>
+                    <textarea id="user-situation" rows="2" placeholder="Quelle question posez-vous à l'Oracle ?"></textarea>
+                </div>
+
+                <button class="enter-btn" onclick="startGame()">Entrer dans la Légende</button>
+                <button class="library-btn" onclick="openLibraryModal()">📂 Ma Bibliothèque</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-interface" class="hidden"> 
+        <div id="sidebar">
+            <div id="hero-sticky-header">
+                <div class="hero-portrait-frame">
+                    <img id="hero-img" class="hero-portrait-img" src="images/neutre.jpg" onerror="this.style.display='none'">
+                </div>
+            </div>
+            <div id="hero-scroll-content">
+                <div id="hero-stats-content"></div>
+                <div id="hero-thoughts-stream"></div>
+            </div>
+        </div>
+
+        <div id="main-area">
+            <div id="deck-scatter-zone"></div>
+            
+            <div id="active-encounter"></div>
+
+            <div id="action-bar"></div>
+        </div>
+
+        <div id="story-book-panel">
+            <div class="book-toolbar">
+                <button onclick="saveProgress()" title="Sauvegarde manuelle">💾 Sauver</button>
+                <button onclick="printBook()" title="Export PDF">🖨️ PDF</button>
+                <button onclick="quitGame()" title="Revenir au menu" style="border-color:#ff4444; color:#ff4444;">❌ Quitter</button>
+            </div>
+            
+            <img src="images/book_header.jpg" class="book-header-img" onerror="this.style.display='none'">
+            <h2 class="book-title">Le Livre de Votre Légende</h2>
+            <div id="book-content"></div>
+        </div>
+    </div>
+
+    <div id="oracle-loader" class="hidden">
+        <div class="loader-content">
+            <div class="mystic-ring outer"></div>
+            <div class="mystic-ring middle"></div>
+            <div class="mystic-eye"></div>
+            <div class="loader-text">Consultation...</div>
+        </div>
+    </div>
+
+    <div id="victory-overlay"></div>
+
+    <div id="library-modal" class="hidden">
+        <div class="library-content">
+            <span class="library-close" onclick="closeLibraryModal()">&times;</span>
+            <h2>Vos Ouvrages</h2>
+            <div id="library-list">
+                <p style="text-align:center; color:#888;">Aucun livre sauvegardé.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="mythos-lightbox" class="hidden" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" src="">
+    </div>
+
+    <script src="scenarios_library.js"></script> 
+    <script src="app.js"></script>          
+
+</body>
+</html>

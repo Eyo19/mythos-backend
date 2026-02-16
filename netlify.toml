@@ -1,0 +1,7 @@
+[build]
+  functions = "netlify/functions"
+  publish = "."
+
+[dev]
+  port = 8888
+  targetPort = 3999 # Correspond au port de ton serveur statique
