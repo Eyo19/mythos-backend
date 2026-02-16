@@ -109,6 +109,8 @@ function updateHeroPortrait(scenarioIndex) {
 // 4. MENU SCENARIOS
 // DANS app.js
 
+// DANS app.js - Remplace la fonction showScenarioMenu par celle-ci :
+
 function showScenarioMenu() {
     const bar = document.getElementById('action-bar');
     bar.innerHTML = "";
@@ -129,14 +131,13 @@ function showScenarioMenu() {
         card.className = "scenario-card-btn";
         const imgNum = idx + 1;
         
-        // --- NOUVEAUTÉ : Calcul du nombre d'étapes ---
-        // On compte la longueur du tableau 'steps'. Si pas de steps, on met "?".
+        // --- Calcul du nombre d'étapes ---
         const stepCount = (s.steps && s.steps.length) ? s.steps.length : "?";
         
         card.innerHTML = `
             <div class="card-top-visual">
                 <img src="images/${imgNum}.png" onerror="this.src='https://via.placeholder.com/300x150?text=Scenario'">
-                <div style="position:absolute; top:5px; right:5px; background:rgba(0,0,0,0.7); color:#fff; padding:2px 6px; border-radius:4px; font-size:0.8em; border:1px solid #d4af37;">
+                <div style="position:absolute; bottom:5px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.7); color:#fff; padding:2px 6px; border-radius:4px; font-size:0.8em; border:1px solid #d4af37; white-space:nowrap;">
                     ⏳ ${stepCount} Tours
                 </div>
             </div>
