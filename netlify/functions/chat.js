@@ -1,5 +1,10 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
+// ==================================================================================
+// TA CLÉ ACTIVE
+// ==================================================================================
+const MY_KEY = "AIzaSyAP2R47xWOpE_2-prrypMWQw3hj0E9uPHo"; 
+
 const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
@@ -8,17 +13,14 @@ const headers = {
 
 exports.handler = async (event) => {
     if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers, body: '' };
-    
+
     try {
-        // --- MODIFICATION ICI : ON APPELLE LA VARIABLE CACHÉE ---
-        // On ne met plus la clé en dur. On demande à Netlify de la fournir.
-        const apiKey = process.env.GEMINI_API_KEY;
-        
-        if (!apiKey) throw new Error("Clé API introuvable dans les variables d'environnement.");
-        
+        const apiKey = (MY_KEY && MY_KEY.length > 20) ? MY_KEY : process.env.GEMINI_API_KEY;
+        if (!apiKey) throw new Error("Clé API introuvable.");
+
         const genAI = new GoogleGenerativeAI(apiKey);
-    
-            const model = genAI.getGenerativeModel({ 
+        
+        const model = genAI.getGenerativeModel({ 
             model: "gemini-2.5-flash", 
             generationConfig: { temperature: 1.0, responseMimeType: "application/json" } 
         });
@@ -81,41 +83,50 @@ exports.handler = async (event) => {
         // --- CAS B : NARRATE (SUITE) ---
         else if (body.action === "NARRATE") {
             finalPrompt = `
-            SUITE DE L'HISTOIRE.
-            STYLE : ${body.styleInstruction}.
-            HÉROS : ${stage} / ${genderRule}.
-            ${ageRule}
-            
-            --- RAPPEL DU FIL ROUGE ---
-            QUÊTE RÉELLE : "${body.userSituation}".
-            
-            --- MÉMOIRE DU RÉCIT ---
-            ${body.previousStory ? body.previousStory.slice(-10000) : "Début."}
-            
-            --- ACTION ---
-            ACTION JOUEUR : "${body.userAction}". 
-            CARTE TIRÉE : ${body.cardData ? body.cardData.name : ""}.
-            
-            FORMAT JSON : { "story_right": "Suite...", "internal_left": "Pensée..." }`;
-        }
+        SUITE DE L'HISTOIRE.
+        STYLE : ${body.styleInstruction}.
+        HÉROS : ${stage} / ${genderRule}.
+        ${ageRule}
+        
+        --- OBJECTIF NARRATIF OBLIGATOIRE (LE SCÉNARIO) ---
+        L'histoire DOIT réaliser cette étape maintenant : "${body.stepInstruction}".
+        Intègre cet événement ou cette prise de conscience dans la narration.
+        
+        --- RAPPEL DU FIL ROUGE ---
+        QUÊTE RÉELLE : "${body.userSituation}".
+        
+        --- MÉMOIRE DU RÉCIT ---
+        ${body.previousStory ? body.previousStory.slice(-10000) : "Début."}
+        
+        --- ACTION ---
+        ACTION JOUEUR : "${body.userAction}". 
+        CARTE TIRÉE : ${body.cardData ? body.cardData.name : ""}.
+        Interprète la carte pour influencer la réussite ou la tournure de cette étape.
+        
+        FORMAT JSON : { "story_right": "Suite...", "internal_left": "Pensée..." }`;
+        }        
+        // --- CAS C : OPTIONS ---
+        // DANS netlify/functions/chat.js
         
         // --- CAS C : OPTIONS ---
         else if (body.action === "OPTIONS") {
             finalPrompt = `
-        CONTEXTE : Jeu narratif de Tarot psychologique.
-        CARTE TIRÉE : ${body.cardData ? body.cardData.name : "Inconnue"}.
-        HÉROS : ${stage} ${gender}.
-        
-        TA MISSION : Proposer 3 actions narratives simples pour faire avancer l'histoire.
-        
-        INTERDICTIONS FORMELLES :
-        - INTERDIT de parler de "dégâts", "bonus", "parade", "compétences".
-        - INTERDIT de faire des listes à puces dans les choix.
-        - Ce n'est PAS un jeu vidéo de combat, c'est un récit.
-        
-        FORMAT JSON ATTENDU (Court, max 10 mots par choix) :
-        { "A": "...", "B": "...", "C": "..." }
-        `;
+    CONTEXTE : Jeu narratif de Tarot psychologique.
+    CARTE TIRÉE : ${body.cardData ? body.cardData.name : "Inconnue"}.
+    HÉROS : ${stage} ${gender}.
+    
+    OBJECTIF DU CHAPITRE À VENIR : "${body.stepInstruction}".
+    
+    TA MISSION : Proposer 3 actions narratives simples.
+    Ces actions doivent permettre au héros d'avancer vers l'objectif du chapitre (ci-dessus) en utilisant l'énergie de la carte tirée.
+    
+    INTERDICTIONS FORMELLES :
+    - INTERDIT de parler de "dégâts", "bonus", "parade", "compétences".
+    - INTERDIT de faire des listes à puces dans les choix.
+    
+    FORMAT JSON ATTENDU (Court, max 10 mots par choix) :
+    { "A": "...", "B": "...", "C": "..." }
+    `;
         }
         console.log(`Envoi Gemini 2.5... Action: ${body.action}`);
         const result = await model.generateContent(finalPrompt);
