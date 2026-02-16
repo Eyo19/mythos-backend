@@ -865,3 +865,67 @@ function quitGame() {
         location.reload();
     }
 }
+    
+    /* --- GESTION DU REDIMENSIONNEMENT (DRAG & DROP COLONNES) --- */
+    document.addEventListener('DOMContentLoaded', () => {
+        initResizers();
+    });
+    
+    function initResizers() {
+        const resizerLeft = document.getElementById('resizer-left');
+        const resizerRight = document.getElementById('resizer-right');
+        const sidebar = document.getElementById('sidebar');
+        const bookPanel = document.getElementById('story-book-panel');
+        
+        if (!resizerLeft || !resizerRight) return;
+        
+        // --- 1. GESTION GAUCHE (SIDEBAR) ---
+        resizerLeft.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            document.addEventListener('mousemove', resizeSidebar);
+            document.addEventListener('mouseup', stopResizeSidebar);
+            resizerLeft.classList.add('resizing');
+            document.body.style.cursor = 'col-resize'; // Force le curseur partout
+        });
+        
+        function resizeSidebar(e) {
+            // La nouvelle largeur = Position X de la souris
+            const newWidth = e.clientX;
+            // Limites de sécurité (Min 150px, Max 40% de l'écran)
+            if (newWidth > 150 && newWidth < window.innerWidth * 0.4) {
+                sidebar.style.width = `${newWidth}px`;
+            }
+        }
+        
+        function stopResizeSidebar() {
+            document.removeEventListener('mousemove', resizeSidebar);
+            document.removeEventListener('mouseup', stopResizeSidebar);
+            resizerLeft.classList.remove('resizing');
+            document.body.style.cursor = 'default';
+        }
+        
+        // --- 2. GESTION DROITE (LIVRE) ---
+        resizerRight.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            document.addEventListener('mousemove', resizeBook);
+            document.addEventListener('mouseup', stopResizeBook);
+            resizerRight.classList.add('resizing');
+            document.body.style.cursor = 'col-resize';
+        });
+        
+        function resizeBook(e) {
+            // Largeur = Largeur totale - Position X de la souris
+            const newWidth = window.innerWidth - e.clientX;
+            // Limites de sécurité (Min 200px, Max 60% de l'écran)
+            if (newWidth > 200 && newWidth < window.innerWidth * 0.6) {
+                bookPanel.style.width = `${newWidth}px`;
+            }
+        }
+        
+        function stopResizeBook() {
+            document.removeEventListener('mousemove', resizeBook);
+            document.removeEventListener('mouseup', stopResizeBook);
+            resizerRight.classList.remove('resizing');
+            document.body.style.cursor = 'default';
+        }
+    }
