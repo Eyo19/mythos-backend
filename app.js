@@ -700,6 +700,8 @@ function deleteSave(saveId) {
     // 5. Imprimer / PDF (VERSION ROBUSTE "ONE SHOT")
     // 5. Imprimer / PDF (VERSION "LIVRE COMPLET" AVEC HÉROS & RÉACTIONS)
     // 5. Imprimer / PDF (VERSION FINALISÉE : HÉROS + RÉACTIONS + NETTOYAGE)
+    // DANS app.js - Remplace la fonction printBook() par celle-ci :
+    
     function printBook() {
         if (!currentScenario) { alert("Aucune histoire à imprimer."); return; }
         
@@ -718,40 +720,37 @@ function deleteSave(saveId) {
         const tempContainer = document.createElement('div');
         
         // A. SECTION HÉROS (Portrait + Profil au début)
-        // On force la création de ce bloc en premier
         const heroSection = document.createElement('div');
         heroSection.className = 'print-hero-section';
         heroSection.innerHTML = `
-        <div class="hero-layout">
-            <div class="hero-visual">
-                <img src="${heroImgSrc}" class="print-hero-img">
-                <div class="hero-caption">${heroName}</div>
-            </div>
-            <div class="print-hero-stats">${heroStats}</div>
+    <div class="hero-layout">
+        <div class="hero-visual">
+            <img src="${heroImgSrc}" class="print-hero-img">
+            <div class="hero-caption">${heroName}</div>
         </div>
-        <hr class="hero-separator">
+        <div class="print-hero-stats">${heroStats}</div>
+    </div>
+    <hr class="hero-separator">
     `;
         tempContainer.appendChild(heroSection);
         
         // B. LES CHAPITRES ET RÉACTIONS
-        // On ne prend QUE les lignes de chapitres (ça évite de copier l'image d'intro du livre qui ferait doublon)
         const chapters = Array.from(bookSource.querySelectorAll('.book-chapter-row'));
         const thoughts = Array.from(thoughtsSource.querySelectorAll('.hero-thought-bubble')); 
         
         chapters.forEach(chapter => {
             // 1. On clone le chapitre
             const chapterClone = chapter.cloneNode(true);
-            const chapterTitle = chapterClone.querySelector('h3').innerText.trim(); // ex: "Chapitre 1 : ..."
+            const chapterTitle = chapterClone.querySelector('h3').innerText.trim();
             
             tempContainer.appendChild(chapterClone);
             
-            // 2. On cherche la réaction correspondante avec une recherche SOUPLE
-            // On isole "Chapitre 1" ou "Prologue"
+            // 2. On cherche la réaction correspondante
             const matchKey = chapterTitle.split(':')[0].trim().toLowerCase(); 
             
             const matchedThought = thoughts.find(t => {
                 const label = t.querySelector('.thought-label').innerText.toLowerCase();
-                return label.includes(matchKey); // "réaction au chapitre 1" contient "chapitre 1"
+                return label.includes(matchKey);
             });
             
             // 3. Si on trouve, on l'insère
@@ -759,7 +758,6 @@ function deleteSave(saveId) {
                 const reactionDiv = document.createElement('div');
                 reactionDiv.className = 'print-reaction';
                 const reactionText = matchedThought.querySelector('.thought-content').innerText;
-                // Nettoyage des guillemets
                 const cleanText = reactionText.replace(/^"|"$/g, '');
                 reactionDiv.innerHTML = `<strong>Réaction :</strong> <em>"${cleanText}"</em>`;
                 tempContainer.appendChild(reactionDiv);
@@ -770,92 +768,100 @@ function deleteSave(saveId) {
         const printWindow = window.open('', '_blank', 'width=900,height=900');
         
         printWindow.document.write(`
-        <html>
-        <head>
-            <title>Légende de ${heroName}</title>
-            <base href="${window.location.origin}${window.location.pathname}">
-            <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@400;600&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <html>
+    <head>
+        <title>Légende de ${heroName}</title>
+        <base href="${window.location.origin}${window.location.pathname}">
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Cormorant+Garamond:ital,wght@400;600&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+        
+        <style>
+            body { 
+                font-family: 'Cormorant Garamond', serif; 
+                padding: 40px; 
+                color: #111; 
+                background: #fff; 
+                max-width: 800px; 
+                margin: 0 auto; 
+            }
             
-            <style>
-                body { 
-                    font-family: 'Cormorant Garamond', serif; 
-                    padding: 40px; 
-                    color: #111; 
-                    background: #fff; 
-                    max-width: 800px; 
-                    margin: 0 auto; 
-                }
-                
-                /* HEADER DU PDF */
-                .print-header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px double #8b0000; }
-                h1 { font-family: 'Cinzel', serif; color: #8b0000; margin: 10px 0; font-size: 2.5em; }
-                h2 { font-family: 'Cinzel', serif; color: #555; font-size: 1.1em; letter-spacing: 2px; text-transform: uppercase; }
-                .book-header-img-top { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; border: 1px solid #333; }
-
-                /* SECTION HÉROS */
-                .hero-layout { 
-                    display: flex; gap: 20px; align-items: flex-start; 
-                    background: #f8f8f8; padding: 20px; 
-                    border: 1px solid #ddd; border-radius: 8px; 
-                    margin-bottom: 30px;
-                }
-                .hero-visual { text-align: center; width: 150px; flex-shrink: 0; }
-                .print-hero-img { width: 100%; height: auto; border: 3px double #d4af37; border-radius: 4px; }
-                .hero-caption { font-family: 'Cinzel', serif; font-weight: bold; margin-top: 5px; color: #8b0000; font-size: 0.9em; }
-                
-                .print-hero-stats { flex: 1; font-family: 'Lato', sans-serif; font-size: 10pt; line-height: 1.4; color: #333; text-align: justify; }
-                .print-hero-stats h4 { 
-                    color: #8b0000; margin: 0 0 5px 0; 
-                    border-bottom: 1px solid #d4af37; 
-                    padding-bottom: 2px; text-transform: uppercase; font-size: 0.9em;
-                }
-                .hero-separator { border: 0; border-top: 1px dashed #ccc; margin: 30px 0; }
-
-                /* CHAPITRES */
-                .book-chapter-row { margin-bottom: 15px; padding-top: 10px; break-inside: avoid; }
-                h3 { font-family: 'Cinzel', serif; color: #000; margin-top: 0; font-size: 1.4em; text-transform: uppercase; border-left: 4px solid #8b0000; padding-left: 10px; }
-                .book-img-right { 
-                    float: right; width: 120px; margin: 5px 0 15px 20px; 
-                    border: 1px solid #333; box-shadow: 3px 3px 0 #eee; 
-                }
-                .story-text-content { font-size: 12pt; line-height: 1.5; text-align: justify; }
-
-                /* RÉACTIONS */
-                .print-reaction { 
-                    background-color: #fffbf0; 
-                    border-left: 3px solid #d4af37; 
-                    padding: 10px 15px; 
-                    margin: 5px 0 30px 0; 
-                    font-family: 'Lato', sans-serif;
-                    font-size: 10pt;
-                    color: #444;
-                    page-break-inside: avoid;
-                }
-                .print-reaction strong { color: #d4af37; text-transform: uppercase; font-size: 0.85em; display: block; margin-bottom: 3px; }
-            </style>
-        </head>
-        <body>
-            <div class="print-header">
-                <img src="${headerImgSrc}" class="book-header-img-top" onerror="this.style.display='none'">
-                <h1>${title}</h1>
-                <h2>L'Odyssée de ${heroName} • ${new Date().toLocaleDateString()}</h2>
-            </div>
+            /* HEADER DU PDF - CORRECTION PROPORTIONS */
+            .print-header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 3px double #8b0000; }
+            h1 { font-family: 'Cinzel', serif; color: #8b0000; margin: 10px 0; font-size: 2.5em; }
+            h2 { font-family: 'Cinzel', serif; color: #555; font-size: 1.1em; letter-spacing: 2px; text-transform: uppercase; }
             
-            <div class="content">
-                ${tempContainer.innerHTML}
-            </div>
+            /* ICI : height auto pour respecter le ratio, max-height pour ne pas envahir la page */
+            .book-header-img-top { 
+                width: 100%; 
+                height: auto; 
+                max-height: 300px; 
+                object-fit: contain; 
+                border-radius: 4px; 
+                border: 1px solid #333; 
+            }
 
-            <script>
-                // On attend que les images soient chargées avant d'imprimer
-                window.onload = function() { 
-                    setTimeout(function() { 
-                        window.print(); 
-                        window.close(); 
-                    }, 800); 
-                };
-            </script>
-        </body>
-        </html>
+            /* SECTION HÉROS */
+            .hero-layout { 
+                display: flex; gap: 20px; align-items: flex-start; 
+                background: #f8f8f8; padding: 20px; 
+                border: 1px solid #ddd; border-radius: 8px; 
+                margin-bottom: 30px;
+            }
+            .hero-visual { text-align: center; width: 150px; flex-shrink: 0; }
+            .print-hero-img { width: 100%; height: auto; border: 3px double #d4af37; border-radius: 4px; }
+            .hero-caption { font-family: 'Cinzel', serif; font-weight: bold; margin-top: 5px; color: #8b0000; font-size: 0.9em; }
+            
+            .print-hero-stats { flex: 1; font-family: 'Lato', sans-serif; font-size: 10pt; line-height: 1.4; color: #333; text-align: justify; }
+            .print-hero-stats h4 { 
+                color: #8b0000; margin: 0 0 5px 0; 
+                border-bottom: 1px solid #d4af37; 
+                padding-bottom: 2px; text-transform: uppercase; font-size: 0.9em;
+            }
+            .hero-separator { border: 0; border-top: 1px dashed #ccc; margin: 30px 0; }
+
+            /* CHAPITRES */
+            .book-chapter-row { margin-bottom: 15px; padding-top: 10px; break-inside: avoid; }
+            h3 { font-family: 'Cinzel', serif; color: #000; margin-top: 0; font-size: 1.4em; text-transform: uppercase; border-left: 4px solid #8b0000; padding-left: 10px; }
+            .book-img-right { 
+                float: right; width: 120px; margin: 5px 0 15px 20px; 
+                border: 1px solid #333; box-shadow: 3px 3px 0 #eee; 
+            }
+            .story-text-content { font-size: 12pt; line-height: 1.5; text-align: justify; }
+
+            /* RÉACTIONS */
+            .print-reaction { 
+                background-color: #fffbf0; 
+                border-left: 3px solid #d4af37; 
+                padding: 10px 15px; 
+                margin: 5px 0 30px 0; 
+                font-family: 'Lato', sans-serif;
+                font-size: 10pt;
+                color: #444;
+                page-break-inside: avoid;
+            }
+            .print-reaction strong { color: #d4af37; text-transform: uppercase; font-size: 0.85em; display: block; margin-bottom: 3px; }
+        </style>
+    </head>
+    <body>
+        <div class="print-header">
+            <img src="${headerImgSrc}" class="book-header-img-top" onerror="this.style.display='none'">
+            <h1>${title}</h1>
+            <h2>L'Odyssée de ${heroName} • ${new Date().toLocaleDateString()}</h2>
+        </div>
+        
+        <div class="content">
+            ${tempContainer.innerHTML}
+        </div>
+
+        <script>
+            window.onload = function() { 
+                setTimeout(function() { 
+                    window.print(); 
+                    window.close(); 
+                }, 800); 
+            };
+        </script>
+    </body>
+    </html>
     `);
         
         printWindow.document.close();
