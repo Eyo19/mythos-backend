@@ -101,8 +101,33 @@ exports.handler = async (event) => {
             
             FORMAT JSON : { "story_right": "Suite...", "internal_left": "Pensée..." }`;
         }
+        // DANS netlify/functions/chat.js (Insérer avant le bloc OPTIONS)
         
-        // --- CAS C : OPTIONS ---
+        // --- CAS C : CONCLUSION (LE GRAND FINAL) ---
+        else if (body.action === "CONCLUSION") {
+            finalPrompt = `
+            C'EST LA FIN DE L'HISTOIRE. L'HEURE DU BILAN.
+            STYLE : ${body.styleInstruction}.
+            HÉROS : ${stage} / ${genderRule}.
+            
+            CONTEXTE FINAL :
+            Le héros a traversé toutes les épreuves. Il arrive au terme de sa quête : "${body.userSituation}".
+            Dernière action du joueur : "${body.userAction}".
+            Dernière carte tirée : ${body.cardData ? body.cardData.name : "Le Monde"}.
+            
+            TA MISSION (ÉPILOGUE) :
+            1. Raconte la résolution finale de l'action en cours.
+            2. Fais un RÉSUMÉ ÉMOTIONNEL de l'aventure : comment le héros a-t-il changé ? A-t-il trouvé ce qu'il cherchait (sa "Vérité") ?
+            3. Offre une conclusion libératrice, ouverte ou définitive, mais MARQUANTE.
+            4. Le ton doit être solennel, touchant et accompli.
+            
+            FORMAT JSON : { 
+                "story_right": "Le texte de l'épilogue et du bilan...", 
+                "internal_left": "Dernière pensée, sagesse acquise ou sentiment de paix..." 
+            }`;
+        }
+        
+        // --- CAS D : OPTIONS (décalé ici) ---
         else if (body.action === "OPTIONS") {
             finalPrompt = `
             CONTEXTE : Jeu narratif de Tarot psychologique.
