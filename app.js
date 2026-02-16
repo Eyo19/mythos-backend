@@ -107,6 +107,8 @@ function updateHeroPortrait(scenarioIndex) {
 }
 
 // 4. MENU SCENARIOS
+// DANS app.js
+
 function showScenarioMenu() {
     const bar = document.getElementById('action-bar');
     bar.innerHTML = "";
@@ -116,24 +118,34 @@ function showScenarioMenu() {
             <p style="color:#ccc; margin-top:5px;">Choisissez le décor de votre quête :</p>
         </div>
     `;
-
+    
     const grid = document.createElement('div');
     grid.className = "scenario-grid";
-
+    
     if (!scenariosDB || !scenariosDB.mythos_scenarios_library) return;
-
+    
     scenariosDB.mythos_scenarios_library.forEach((s, idx) => {
         const card = document.createElement('div');
         card.className = "scenario-card-btn";
         const imgNum = idx + 1;
         
+        // --- NOUVEAUTÉ : Calcul du nombre d'étapes ---
+        // On compte la longueur du tableau 'steps'. Si pas de steps, on met "?".
+        const stepCount = (s.steps && s.steps.length) ? s.steps.length : "?";
+        
         card.innerHTML = `
             <div class="card-top-visual">
                 <img src="images/${imgNum}.png" onerror="this.src='https://via.placeholder.com/300x150?text=Scenario'">
+                <div style="position:absolute; top:5px; right:5px; background:rgba(0,0,0,0.7); color:#fff; padding:2px 6px; border-radius:4px; font-size:0.8em; border:1px solid #d4af37;">
+                    ⏳ ${stepCount} Tours
+                </div>
             </div>
             <div class="card-bottom-text">
                 <div class="card-title">${s.title}</div>
-                <div class="card-desc">${s.intent || "..."}</div>
+                <div class="card-desc">
+                    <strong style="color:#d4af37;">Durée : ${stepCount} Étapes</strong><br>
+                    ${s.intent || "..."}
+                </div>
             </div>
         `;
         card.onclick = () => launchScenario(s.id, imgNum);
@@ -141,7 +153,6 @@ function showScenarioMenu() {
     });
     bar.appendChild(grid);
 }
-
 // 5. LANCEMENT DU SCENARIO
 async function launchScenario(id, imgIndex) {
     currentScenario = scenariosDB.mythos_scenarios_library.find(x => x.id === id);
