@@ -16,7 +16,7 @@
     <div id="setup-container">
         <div class="setup-card">
             <div class="setup-header">
-                <img src="ImageMythos.png" alt="Mythos" class="mythos-banner" onerror="this.style.display='none'">
+                <img src="images/ImageMythos.png" alt="Mythos" class="mythos-banner" onerror="this.src='ImageMythos.png'">
             </div>
             
             <div class="setup-content">
@@ -61,6 +61,7 @@
     </div>
 
     <div id="game-interface" class="hidden"> 
+        
         <div id="sidebar">
             <div id="hero-sticky-header">
                 <div class="hero-portrait-frame">
@@ -73,14 +74,16 @@
             </div>
         </div>
 
+        <div class="resizer" id="resizer-left"></div>
+        
         <div id="main-area">
             <div id="deck-scatter-zone"></div>
-            
             <div id="active-encounter"></div>
-
             <div id="action-bar"></div>
         </div>
 
+        <div class="resizer" id="resizer-right"></div>
+        
         <div id="story-book-panel">
             <div class="book-toolbar">
                 <button onclick="saveProgress()" title="Sauvegarde manuelle">💾 Sauver</button>
@@ -92,6 +95,7 @@
             <h2 class="book-title">Le Livre de Votre Légende</h2>
             <div id="book-content"></div>
         </div>
+
     </div>
 
     <div id="oracle-loader" class="hidden">
@@ -121,7 +125,7 @@
     </div>
 
     <script src="scenarios_library.js"></script> 
-    <script src="app.js"></script>          
+    <script src="app.js"></script>           
 
 </body>
 </html>
