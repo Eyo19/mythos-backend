@@ -344,22 +344,43 @@ function showOptions(opts, cardData) {
 }
 
 // 9. RÉSOLUTION DU TOUR
+// DANS app.js - Remplace la fonction resolveTurn existante
+
 async function resolveTurn(cardData, actionTxt) {
     document.getElementById('action-bar').innerHTML = "<div style='text-align:center; color:#888;'>L'Oracle tisse la suite...</div>";
-    const res = await callAI("NARRATE", cardData, actionTxt);
+    
+    // 1. DÉTECTION : Est-ce la dernière étape ?
+    // On regarde si l'index actuel est le dernier du tableau 'steps'
+    const isLastStep = (currentStepIndex === currentScenario.steps.length - 1);
+    
+    // 2. CHOIX DE L'ACTION : 'CONCLUSION' ou 'NARRATE'
+    const actionType = isLastStep ? "CONCLUSION" : "NARRATE";
+    
+    // 3. APPEL IA
+    const res = await callAI(actionType, cardData, actionTxt);
     const data = safeJSONParse(res);
     
+    // 4. AFFICHAGE
+    let title = `Chapitre ${currentStepIndex + 1}`;
+    if (isLastStep) title += " : Épilogue"; // Petit bonus visuel
+    
     if (data) {
-        addToBook(`Chapitre ${currentStepIndex+1}`, data.story_right, data.internal_left, cardData.id);
+        addToBook(title, data.story_right, data.internal_left, cardData.id);
     } else {
-        addToBook(`Chapitre ${currentStepIndex+1}`, res, "", cardData.id);
+        addToBook(title, res, "", cardData.id);
     }
     
     currentStepIndex++;
     saveProgress(true); // AUTO-SAVE
-    playStep();
+    
+    // 5. SUITE OU FIN
+    // Si c'était la dernière étape, on déclenche la fin du jeu juste après
+    if (isLastStep) {
+        setTimeout(endGame, 2000); // Petite pause pour laisser lire avant l'écran de fin
+    } else {
+        playStep();
+    }
 }
-
 // 10. FIN DU JEU
 function endGame() {
     saveProgress(true); // SAVE FINALE
